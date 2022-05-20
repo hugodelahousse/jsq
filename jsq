@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+const fs = require('fs');
+
+const HELP_FLAGS = ['-?', '-h', '--help'];
+
+const args = process.argv.slice(2);
+
+if (args.some(arg => HELP_FLAGS.includes(arg))) {
+  console.log('Usage: jsq <js transform> <?file>')
+}
+
+const file = (!args[1] || args[1] === '-') ? 0 : args[1];
+
+
+const input = JSON.parse(fs.readFileSync(file, 'utf-8'));
+
+const output = eval(args[0]);
+
+const indent = process.stdin.isTTY;
+
+console.log(JSON.stringify(output, null, 4));
