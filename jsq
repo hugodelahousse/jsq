@@ -18,4 +18,4 @@ const output = eval(args[0]);
 
 const indent = process.stdin.isTTY;
 
-console.log(JSON.stringify(output, null, 4));
+console.log(JSON.stringify(output, null, indent ? 2 : 0));
